@@ -16,38 +16,37 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: kbackgroundColor,
-          elevation: 1,
-          centerTitle: true,
-          title: Row(
-            verticalDirection: VerticalDirection.up,
-            textBaseline: TextBaseline.ideographic,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "DateMe",
-                style: klargeTitleStyle,
-              ),
-              Container(
-                width: 30,
-                height: 30,
-                child: Image.asset("assets/icons/DateMe Logo.png"),
+            backgroundColor: kbackgroundColor,
+            elevation: 1,
+            centerTitle: true,
+            title: Row(
+              verticalDirection: VerticalDirection.up,
+              textBaseline: TextBaseline.ideographic,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "DateMe",
+                  style: klargeTitleStyle,
+                ),
+                Container(
+                  width: 30,
+                  height: 30,
+                  child: Image.asset("assets/icons/DateMe Logo.png"),
+                ),
+              ],
+            ),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.message),
+                color: Colors.orange,
               ),
             ],
-          ),
-          actions: [
-            IconButton(
+            leading: IconButton(
               onPressed: () {},
               icon: const Icon(FontAwesomeIcons.slidersH),
               color: Colors.orange,
-            )
-          ],
-          leading: IconButton(
-            onPressed: () {},
-            icon: const Icon(FontAwesomeIcons.alignRight),
-            color: Colors.orange,
-          ),
-        ),
+            )),
         backgroundColor: kbackgroundColor,
         body: SafeArea(
           child: Center(

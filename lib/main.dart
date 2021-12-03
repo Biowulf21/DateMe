@@ -10,6 +10,10 @@ class DateMe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(title: "Date Me", home: HomePage());
+    return const MaterialApp(
+      title: "Date Me",
+      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
