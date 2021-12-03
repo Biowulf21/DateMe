@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 Color kbackgroundColor = const Color(0xffF2ECD8);
+Color kpinkColor = const Color(0xffF26052);
+
 TextStyle klargeTitleStyle =
     const TextStyle(color: Colors.black, fontWeight: FontWeight.w800);
 TextStyle kswipeNameStyle = const TextStyle(fontSize: 18);
