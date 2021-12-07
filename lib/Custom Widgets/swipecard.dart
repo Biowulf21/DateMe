@@ -128,8 +128,6 @@ class customMusicCard extends StatelessWidget {
               child: Row(
                 children: [
                   Flexible(child: musicTrackCard()),
-                  Flexible(child: musicTrackCard()),
-                  Flexible(child: musicTrackCard()),
                 ],
               ),
             ),
@@ -178,7 +176,7 @@ class musicTrackCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: Colors.red, borderRadius: BorderRadius.circular(20.0)),
-        width: MediaQuery.of(context).size.width * 0.4,
+        width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.3,
       ),
     );
