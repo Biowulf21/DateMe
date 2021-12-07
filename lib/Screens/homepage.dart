@@ -58,12 +58,8 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.only(top: 10),
                   child: SwipeStack(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12.0),
-                  child: Text(
-                    "Name of person, Age",
-                    style: kswipeNameStyle,
-                  ),
+                SizedBox(
+                  height: 20,
                 ),
                 Flexible(
                   child: Row(
@@ -92,31 +88,6 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Image.asset("assets/icons/Swipe left.png"),
-                      iconSize: 60,
-                      splashRadius: 40,
-                      color: Colors.red,
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Image.asset("assets/icons/Favorite.png"),
-                      iconSize: 60,
-                      splashRadius: 40,
-                      color: const Color(0xffE8C842),
-                    ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Image.asset("assets/icons/Swipe right.png"),
-                        iconSize: 60,
-                        splashRadius: 40,
-                        color: const Color(0xff4CD964))
-                  ],
-                )
               ],
             ),
           ),

@@ -1,12 +1,28 @@
+import 'package:dateme/Classes/Person.dart';
 import 'package:dateme/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipable/flutter_swipable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SwipeCard extends StatelessWidget {
-  SwipeCard({Key? key, required this.colour}) : super(key: key);
+//modules
+import 'package:dateme/Classes/personList.dart';
 
+class SwipeCard extends StatelessWidget {
+  SwipeCard(
+      {Key? key,
+      required this.profilePicture,
+      required this.colour,
+      required this.firstName,
+      required this.age,
+      required this.bio})
+      : super(key: key);
+
+  NetworkImage profilePicture;
   Color colour;
+  String firstName;
+  int age;
+  String bio;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -31,11 +47,25 @@ class SwipeCard extends StatelessWidget {
           print('Swiped left');
         },
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: MediaQuery.of(context).size.height * 0.7,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0), color: colour),
-        ),
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.7,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: colour,
+                image:
+                    DecorationImage(image: profilePicture, fit: BoxFit.cover)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                    padding: const EdgeInsets.only(bottom: 20, left: 20),
+                    child: Text(
+                      '${firstName}, ${age}',
+                      style: kboldNameStyle,
+                    )),
+              ],
+            )),
       ),
     );
   }
@@ -238,13 +268,26 @@ class SwipeStack extends StatefulWidget {
 }
 
 class _SwipeStackState extends State<SwipeStack> {
+  //list of people whose information will be put from  'database'
+  late List<Person> userList;
+  Users users = Users();
   List<SwipeCard> listofCards = [
-    SwipeCard(colour: Colors.red),
-    SwipeCard(colour: Colors.blue),
-    SwipeCard(colour: Colors.green),
-    SwipeCard(colour: Colors.lightBlue),
-    SwipeCard(colour: Colors.purple)
+    SwipeCard(
+      colour: Colors.red,
+      firstName: 'Nanamie',
+      age: 21,
+      bio: 'I\'m an independent woman who don\'t need no man (jk date me pls).',
+      profilePicture: NetworkImage(
+          'https://scontent.fdvo2-1.fna.fbcdn.net/v/t39.30808-6/248586883_4529129670528154_1107776970941438761_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=6-NuISOZfjcAX-xqpDI&_nc_ht=scontent.fdvo2-1.fna&oh=270b757a326744985551d6b01341d338&oe=61B3F55B'),
+    )
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    //on intiialization of page, all item in the personlist database will be imported to the userlist variable
+    userList = users.itemlist;
+  }
 
   @override
   Widget build(BuildContext context) {

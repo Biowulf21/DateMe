@@ -5,6 +5,9 @@ Color kpinkColor = const Color(0xffF26052);
 
 TextStyle klargeTitleStyle =
     const TextStyle(color: Colors.black, fontWeight: FontWeight.w800);
-TextStyle kswipeNameStyle = const TextStyle(fontSize: 18);
+TextStyle kbiofontstyle = const TextStyle(fontSize: 16, color: Colors.white);
 TextStyle kboldNameStyle = const TextStyle(
-    fontSize: 20, fontWeight: FontWeight.w500, fontStyle: FontStyle.italic);
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.italic,
+    color: Colors.white);
