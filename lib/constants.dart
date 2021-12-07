@@ -11,3 +11,8 @@ TextStyle kboldNameStyle = const TextStyle(
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.italic,
     color: Colors.white);
+TextStyle kboldNameStyleBlack = const TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.italic,
+    color: Colors.black);
