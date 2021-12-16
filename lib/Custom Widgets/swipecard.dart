@@ -12,15 +12,15 @@ class SwipeCard extends StatelessWidget {
   SwipeCard(
       {Key? key,
       required this.profilePicture,
-      required this.colour,
       required this.firstName,
       required this.lastName,
+      this.colour,
       required this.age,
       required this.bio})
       : super(key: key);
 
   NetworkImage profilePicture;
-  Color colour;
+  Color? colour;
   String firstName;
   String lastName;
   int age;
@@ -198,14 +198,28 @@ class _SwipeStackState extends State<SwipeStack> {
   Users users = Users();
   List<SwipeCard> listofCards = [
     SwipeCard(
-      colour: Colors.red,
-      firstName: 'Nanamie',
-      lastName: 'Sakamoto',
-      age: 21,
-      bio: 'I\'m an independent woman who don\'t need no man (jk date me pls).',
-      profilePicture: NetworkImage(
-          'https://scontent.fdvo2-1.fna.fbcdn.net/v/t39.30808-6/248586883_4529129670528154_1107776970941438761_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=6-NuISOZfjcAX-xqpDI&_nc_ht=scontent.fdvo2-1.fna&oh=270b757a326744985551d6b01341d338&oe=61B3F55B'),
-    )
+        profilePicture: NetworkImage(
+            'https://scontent.fmnl4-5.fna.fbcdn.net/v/t1.18169-9/17796373_10212446561029805_2031448292497081221_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=174925&_nc_ohc=xnCcKkr_j9IAX8nDYe-&_nc_ht=scontent.fmnl4-5.fna&oh=00_AT_bAgIPBxXSpfy5BUNRhk9S_RU-iTeSKtlKyrAmAYpd1g&oe=61E09406'),
+        firstName: 'Poloi',
+        lastName: 'Ash',
+        age: 24,
+        bio: 'Git gud bro'),
+    SwipeCard(
+        profilePicture: const NetworkImage(
+            'https://scontent.fmnl4-1.fna.fbcdn.net/v/t1.18169-9/19366618_1541518562576921_4912835116745060597_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=174925&_nc_ohc=qySjCQjRWNoAX_iNJGH&_nc_ht=scontent.fmnl4-1.fna&oh=00_AT975VxKFqu_c-BuSSw4p2cqKeNwOVqigB8EeH3hpCJbbg&oe=61E219BA'),
+        colour: Colors.red,
+        firstName: 'James',
+        lastName: 'Panganiban',
+        age: 20,
+        bio: '@Jamesdeii✌s'),
+    SwipeCard(
+        profilePicture: const NetworkImage(
+            'https://scontent.fmnl4-3.fna.fbcdn.net/v/t1.6435-9/173108996_3810358232424372_6382907658385410901_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=xKL_ycrrvV0AX8Z8VRh&_nc_ht=scontent.fmnl4-3.fna&oh=0a03ba157d0921fa3d03854133099994&oe=61D51777'),
+        colour: Colors.red,
+        firstName: 'James',
+        lastName: 'Jilhaney',
+        age: 22,
+        bio: 'Professional idiot and gamer. Are you ready for 3 inches?'),
   ];
 
   @override

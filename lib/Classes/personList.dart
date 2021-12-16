@@ -26,9 +26,34 @@ class Users {
         age: 21,
         gender: Gender.male,
         preferredGender: Gender.female),
+    Person(
+      fname: 'Aaron',
+      lname: 'Lagura',
+      bio: 'I like icecream!',
+      birthday: DateTime.utc(2000, 12, 1),
+      age: 21,
+      gender: Gender.male,
+      preferredGender: Gender.female,
+      profilePicture: Image.network(
+          'https://scontent.fmnl4-5.fna.fbcdn.net/v/t1.6435-9/104127891_1675191699315476_7377662041652503862_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=eXQfLeObqCQAX-nHjG7&tn=lwD1PZnNUdIStSbg&_nc_ht=scontent.fmnl4-5.fna&oh=00_AT9KXc58b5dt1kFMu_7RJrGl80XSRSJuYu9Io52Qqo30JA&oe=61E14FFD'),
+    ),
+    Person(
+        fname: 'Christlie',
+        lname: 'Bestes',
+        bio: 'Certified 21 Pilots fan',
+        birthday: DateTime.utc(2001, 12, 19),
+        age: 20,
+        gender: Gender.male,
+        preferredGender: Gender.female,
+        profilePicture: Image.network(
+            'https://pbs.twimg.com/profile_images/1316016469273055236/T-C1bUEn_400x400.jpg'))
   ];
 
   get itemlist {
     return _items;
+  }
+
+  get listLength {
+    return _items.length;
   }
 }

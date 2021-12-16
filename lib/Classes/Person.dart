@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 enum Gender { male, female, gay, lesbian, bisexual, nonbinary }
 
 class Person {
-  Widget profilePicture;
+  Image profilePicture;
   //List<Widget> listofPhotos;
   String fname, lname, bio;
   int age;

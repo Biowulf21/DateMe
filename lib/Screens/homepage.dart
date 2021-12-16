@@ -1,4 +1,5 @@
 import 'package:dateme/Custom%20Widgets/swipecard.dart';
+import 'package:dateme/Screens/messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:dateme/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -37,7 +38,10 @@ class _HomePageState extends State<HomePage> {
             ),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Messaging()));
+                },
                 icon: const Icon(Icons.message),
                 color: Colors.orange,
               ),
