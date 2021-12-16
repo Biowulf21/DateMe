@@ -1,12 +1,31 @@
-import 'package:dateme/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipable/flutter_swipable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SwipeCard extends StatelessWidget {
-  SwipeCard({Key? key, required this.colour}) : super(key: key);
+//modules
+import 'package:dateme/Classes/personList.dart';
+import 'musicWidgets.dart';
+import 'package:dateme/Classes/Person.dart';
+import 'package:dateme/constants.dart';
 
-  Color colour;
+class SwipeCard extends StatelessWidget {
+  SwipeCard(
+      {Key? key,
+      required this.profilePicture,
+      required this.firstName,
+      required this.lastName,
+      this.colour,
+      required this.age,
+      required this.bio})
+      : super(key: key);
+
+  NetworkImage profilePicture;
+  Color? colour;
+  String firstName;
+  String lastName;
+  int age;
+  String bio;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -19,7 +38,8 @@ class SwipeCard extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
             isScrollControlled: true,
             context: context,
-            builder: (context) => buildSheet(context));
+            builder: (context) =>
+                BuildSheet(firstname: firstName, bio: bio, age: age));
         // Navigator.push(context, Drawer())
       },
       child: Swipable(
@@ -31,15 +51,41 @@ class SwipeCard extends StatelessWidget {
           print('Swiped left');
         },
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: MediaQuery.of(context).size.height * 0.7,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0), color: colour),
-        ),
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.7,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: colour,
+                image:
+                    DecorationImage(image: profilePicture, fit: BoxFit.cover)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                    padding: const EdgeInsets.only(bottom: 20, left: 20),
+                    child: Text(
+                      '${firstName}, ${age}',
+                      style: kboldNameStyle,
+                    )),
+              ],
+            )),
       ),
     );
   }
+}
 
+class BuildSheet extends StatefulWidget {
+  String firstname, bio;
+  int age;
+
+  BuildSheet({required this.firstname, required this.bio, required this.age});
+
+  @override
+  _BuildSheetState createState() => _BuildSheetState();
+}
+
+class _BuildSheetState extends State<BuildSheet> {
   Widget makeDismissable(
           {required Widget child, required BuildContext context}) =>
       GestureDetector(
@@ -51,163 +97,70 @@ class SwipeCard extends StatelessWidget {
         ),
       );
 
-  buildSheet(context) => makeDismissable(
-        context: context,
-        child: DraggableScrollableSheet(
-          maxChildSize: 0.7,
-          initialChildSize: 0.3,
-          builder: (_, controller) => Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-            child: ListView(
-              controller: controller,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 15, 0, 10),
-                  child: Text(
-                    'First Name, 21',
-                    style: kboldNameStyle,
-                  ),
-                ),
-                Divider(),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    "About Me",
-                    style: TextStyle(
-                        color: Colors.orange,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic),
-                  ),
-                ),
-                const Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
-                  child: Text(
-                      'Im a photgrapher and a model. Just want someone to hang out with.'),
-                ),
-                Divider(), //customize the divider
-                customInterestCard(
-                    interestText: "Interest 1", colour: Colors.red),
-                customInterestCard(
-                    interestText: "Interest 2", colour: Colors.orange),
-                customInterestCard(
-                    interestText: "Interest 3", colour: Colors.yellow),
-                Divider(),
-                customMusicCard(),
-                Center(
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: Icon(Icons.close, size: 30, color: Colors.orange)),
-                )
-              ],
-            ),
-          ),
-        ),
-      );
-}
-
-class customMusicCard extends StatelessWidget {
-  const customMusicCard({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: Card(
-          //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Container(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Row(
-                children: [
-                  Flexible(child: musicTrackCard()),
-                  Flexible(child: musicTrackCard()),
-                  Flexible(child: musicTrackCard()),
-                ],
+    return makeDismissable(
+      context: context,
+      child: DraggableScrollableSheet(
+        maxChildSize: 0.7,
+        initialChildSize: 0.3,
+        builder: (_, controller) => Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+          child: ListView(
+            controller: controller,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 15, 0, 10),
+                child: Text(
+                  '${widget.firstname}, ${widget.age}',
+                  style: kboldNameStyleBlack,
+                ),
               ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 2.5, horizontal: 10),
-              child: Row(
-                children: [
-                  Flexible(flex: 3, child: customMessageButton()),
-                  Flexible(
-                      flex: 1,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            shape: CircleBorder()),
-                        onPressed: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Icon(FontAwesomeIcons.userPlus,
-                              color: Colors.black),
-                        ),
-                      ))
-                ],
+              Divider(),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  "About Me",
+                  style: TextStyle(
+                      color: Colors.orange,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic),
+                ),
               ),
-            )
-          ],
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+                child: Text('${widget.bio}'),
+              ),
+              Divider(), //customize the divider
+              customInterestCard(
+                  interestText: "Interest 1", colour: Colors.red),
+              customInterestCard(
+                  interestText: "Interest 2", colour: Colors.orange),
+              customInterestCard(
+                  interestText: "Interest 3", colour: Colors.yellow),
+              Divider(),
+              customMusicCard(),
+              Center(
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(Icons.close, size: 30, color: Colors.orange)),
+              )
+            ],
+          ),
         ),
-        height: MediaQuery.of(context).size.height * 0.4,
-        decoration: BoxDecoration(
-            color: Colors.green, borderRadius: BorderRadius.circular(20.0)),
-      )),
+      ),
     );
   }
 }
 
 //custom card for the music tracks
-class musicTrackCard extends StatelessWidget {
-  const musicTrackCard({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.red, borderRadius: BorderRadius.circular(20.0)),
-        width: MediaQuery.of(context).size.width * 0.4,
-        height: MediaQuery.of(context).size.height * 0.3,
-      ),
-    );
-  }
-}
 
 //message button on the bottom sheet
-class customMessageButton extends StatelessWidget {
-  const customMessageButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => print("messaging person"),
-      child: Container(
-        child: Center(
-            child: Text('Message',
-                style: TextStyle(
-                    color: kpinkColor,
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.w400))),
-        height: MediaQuery.of(context).size.height * 0.05,
-        width: MediaQuery.of(context).size.width * 0.7,
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(20.0)),
-      ),
-    );
-  }
-}
 
 class customInterestCard extends StatelessWidget {
   String interestText;
@@ -240,13 +193,41 @@ class SwipeStack extends StatefulWidget {
 }
 
 class _SwipeStackState extends State<SwipeStack> {
+  //list of people whose information will be put from  'database'
+  late List<Person> userList;
+  Users users = Users();
   List<SwipeCard> listofCards = [
-    SwipeCard(colour: Colors.red),
-    SwipeCard(colour: Colors.blue),
-    SwipeCard(colour: Colors.green),
-    SwipeCard(colour: Colors.lightBlue),
-    SwipeCard(colour: Colors.purple)
+    SwipeCard(
+        profilePicture: NetworkImage(
+            'https://scontent.fmnl4-5.fna.fbcdn.net/v/t1.18169-9/17796373_10212446561029805_2031448292497081221_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=174925&_nc_ohc=xnCcKkr_j9IAX8nDYe-&_nc_ht=scontent.fmnl4-5.fna&oh=00_AT_bAgIPBxXSpfy5BUNRhk9S_RU-iTeSKtlKyrAmAYpd1g&oe=61E09406'),
+        firstName: 'Poloi',
+        lastName: 'Ash',
+        age: 24,
+        bio: 'Git gud bro'),
+    SwipeCard(
+        profilePicture: const NetworkImage(
+            'https://scontent.fmnl4-1.fna.fbcdn.net/v/t1.18169-9/19366618_1541518562576921_4912835116745060597_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=174925&_nc_ohc=qySjCQjRWNoAX_iNJGH&_nc_ht=scontent.fmnl4-1.fna&oh=00_AT975VxKFqu_c-BuSSw4p2cqKeNwOVqigB8EeH3hpCJbbg&oe=61E219BA'),
+        colour: Colors.red,
+        firstName: 'James',
+        lastName: 'Panganiban',
+        age: 20,
+        bio: '@Jamesdeii✌s'),
+    SwipeCard(
+        profilePicture: const NetworkImage(
+            'https://scontent.fmnl4-3.fna.fbcdn.net/v/t1.6435-9/173108996_3810358232424372_6382907658385410901_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=xKL_ycrrvV0AX8Z8VRh&_nc_ht=scontent.fmnl4-3.fna&oh=0a03ba157d0921fa3d03854133099994&oe=61D51777'),
+        colour: Colors.red,
+        firstName: 'James',
+        lastName: 'Jilhaney',
+        age: 22,
+        bio: 'Professional idiot and gamer. Are you ready for 3 inches?'),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    //on intiialization of page, all item in the personlist database will be imported to the userlist variable
+    userList = users.itemlist;
+  }
 
   @override
   Widget build(BuildContext context) {

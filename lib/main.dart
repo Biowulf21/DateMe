@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Screens/homepage.dart';
+import 'constants.dart';
 
 void main() {
   runApp(const DateMe());
@@ -10,6 +11,14 @@ class DateMe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(title: "Date Me", home: HomePage());
+    return MaterialApp(
+      title: "Date Me",
+      theme: ThemeData.light().copyWith(
+          backgroundColor: Colors.orange,
+          primaryColor: Colors.orange,
+          focusColor: Colors.orangeAccent),
+      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
